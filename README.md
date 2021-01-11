@@ -11,3 +11,7 @@ stored in DynamoDB after CSV file upload.
 ● Create modules wherever needed.
 ● Use a remote backend for terraform.
 ● All the resources should be created in Terraform(No manual).
+
+
+Now, it’s time to upload index.zip into the S3 bucket we just created. We’ll achieve this using the command 
+'aws s3 cp index.zip s3://mybuck123462/index.zip'

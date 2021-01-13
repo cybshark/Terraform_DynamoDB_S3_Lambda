@@ -12,6 +12,83 @@ stored in DynamoDB after CSV file upload.
 ● Use a remote backend for terraform.
 ● All the resources should be created in Terraform(No manual).
 
+### Step 1: 
+First of all, we’ll create a project directory named mycode in our local system. Inside this directory, we’ll create a file named index.js, which will contain the following code.
 
-Now, it’s time to upload index.zip into the S3 bucket we just created. We’ll achieve this using the command 
-'aws s3 cp index.zip s3://mybuck123462/index.zip'
+``` var AWS = require('aws-sdk');
+var dynamo = new AWS.DynamoDB.DocumentClient();
+
+exports.handler = function(event, context, callback) {
+
+    var operation = event.operation;
+
+    if (event.tableName) {
+        event.payload.TableName = event.tableName;
+    }
+
+    switch (operation) {
+        case 'create':
+            dynamo.put(event.payload, callback);
+            break;
+        case 'read':
+            dynamo.get(event.payload, callback);
+            break;
+        default:
+            callback('Unknown operation: ${operation}');
+    }
+};  
+
+
+```
+
+
+### Step 2: 
+Now, we will zip index.js into index.zip using any zipping software or using CLI and will keep this zip file into the same directory only and upload on S3 bucket using aws CLI.
+
+`$ aws s3 cp index.zip s3://mybucket98161615/index.zip`
+
+### Step 3:
+Now we’ll create an IAM access policy with JSON to grant the required permissions to the DynamoDB table. We will attach this policy to a role, and this role will then be attached to a Lambda function, which will assume the required access to DynamoDB.
+~~~
+{
+    "Version": "2012-10-17",
+    "Statement": [
+      {
+        "Action": "sts:AssumeRole",
+        "Principal": {
+          "Service": "lambda.amazonaws.com"
+        },
+        "Effect": "Allow",
+        "Sid": ""
+      }
+    ]
+}
+~~~~
+
+And the policy.json contains 
+
+```
+{  
+  "Version": "2012-10-17",
+  "Statement":[{
+    "Effect": "Allow",
+    "Action": [
+     "dynamodb:BatchGetItem",
+     "dynamodb:GetItem",
+     "dynamodb:Query",
+     "dynamodb:Scan",
+     "dynamodb:BatchWriteItem",
+     "dynamodb:PutItem",
+     "dynamodb:UpdateItem"
+    ],
+    "Resource": "arn:aws:dynamodb:us-east-1:689228683508:table/mydb"
+   }
+  ]
+}
+```
+
+Configuration Details:
+
+![alt text](http://url/to/img.png)
+
+

@@ -89,6 +89,15 @@ And the policy.json contains
 
 Configuration Details:
 
-![alt text](http://url/to/img.png)
+![Lambda Configure](https://github.com/cybshark/Terraform_DynamoDB_S3_Lambda/blob/main/Terracode/lambda.JPG)
+
+![S3 Buckeket](https://github.com/cybshark/Terraform_DynamoDB_S3_Lambda/blob/main/Terracode/s33.JPG)
+
+![DyananoDB](https://github.com/cybshark/Terraform_DynamoDB_S3_Lambda/blob/main/Terracode/dyDb.JPG)
+
+#conclusion
+Im Facing have lot of error to how to put data in tabel. And IAM Roles.
+I try to do best but lack of experinces so I fail error.
+IF Anyone know about CRUD and so please Add here.
 
 

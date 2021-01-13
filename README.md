@@ -95,7 +95,7 @@ Configuration Details:
 
 ![DyananoDB](https://github.com/cybshark/Terraform_DynamoDB_S3_Lambda/blob/main/Terracode/dyDb.JPG)
 
-#conclusion
+#  conclusion
 Im Facing have lot of error to how to put data in tabel. And IAM Roles.
 I try to do best but lack of experinces so I fail error.
 IF Anyone know about CRUD and so please Add here.
